@@ -1,0 +1,25 @@
+{
+  "name": "live-chat-with-websocket-and-reactjs",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <a href=\"\" rel=\"noopener\">\r  <img width=400px height=200px src=\"crud_logo.png\" alt=\"Project logo\"></a>\r </p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaorjoaquim/Live-Chat-with-Websocket-and-ReactJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaorjoaquim/Live-Chat-with-Websocket-and-ReactJS/issues"
+  },
+  "homepage": "https://github.com/joaorjoaquim/Live-Chat-with-Websocket-and-ReactJS#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "socket.io": "^4.5.2"
+  }
+}
