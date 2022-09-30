@@ -15,4 +15,12 @@ app.use('/', (req, res) => {
     res.render('index.html');
 });
 
+io.on('connection', socket => {
+    console.log(`Socket conectado: ${socket.id}`);
+
+    socket.on('sendMessage', data => {
+        console.log(data);
+    })
+});
+
 server.listen(PORT);
