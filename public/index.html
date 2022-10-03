@@ -17,25 +17,29 @@
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
-        <form id="chat">
-            <input
-                type="text"
-                name="username"
-                placeholder="Digite seu usuário"
-            />
-            <div class="messages"></div>
-
-            <div id="footer">
-                <input
-                    type="text"
-                    name="message"
-                    placeholder="Digite sua mensagem"
-                />
-                <button type="submit" class="buttonSubmit">
-                    <i class="fa fa-paper-plane"></i>
-                </button>
+        <div id="root">
+            <div class="__main">
+                <div class="__sidebar"></div>
+                <div class="__chatbody">
+                    <form id="chat">
+                        <div class="__messages">
+                            <div class="messages"></div>
+                        </div>
+                        <div class="__inputField">
+                            <input
+                                type="text"
+                                name="message"
+                                class="__messageInput"
+                                placeholder="Digite sua mensagem"
+                            />
+                            <button type="submit" class="__btnSubmit">
+                                <i class="fa fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
 
         <script type="text/javascript">
             $(document).ready(function () {
@@ -64,10 +68,11 @@
                 $('#chat').submit(function (event) {
                     event.preventDefault();
 
-                    var author = $('input[name=username]').val(); //return undefined object
-
+                    // var author = $('input[name=username]').val(); //return undefined object
+                    var author = 'Usuário';
                     var message = $('input[name=message]').val();
-                    console.log(author);
+
+                    var today = new Date();
 
                     if (author.length && message.length) {
                         var messageObject = {
