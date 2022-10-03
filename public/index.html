@@ -1,61 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Live Chat</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>John Live Chat</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"></script>
 
-    <link rel="stylesheet" href="styles.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
 
-</head>
-<body>
-    <form id="chat">
-        <input type="text" name="username" placeholder="Digite seu usuário">
-        <div class="messages"></div>
-                
-        <div id="footer">
-            <input type="text" name="message" placeholder="Digite sua mensagem">
-            <button type="submit" class="buttonSubmit">
-                <i class="fa fa-paper-plane"></i>
-            </button>
-        </div>
- 
-    </form>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <form id="chat">
+            <input
+                type="text"
+                name="username"
+                placeholder="Digite seu usuário"
+            />
+            <div class="messages"></div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-			var socket = io('http://localhost:3000');
+            <div id="footer">
+                <input
+                    type="text"
+                    name="message"
+                    placeholder="Digite sua mensagem"
+                />
+                <button type="submit" class="buttonSubmit">
+                    <i class="fa fa-paper-plane"></i>
+                </button>
+            </div>
+        </form>
 
-			
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var socket = io('http://localhost:3000');
 
-			$('#chat').submit(function(event) {
-				
-				event.preventDefault();
-				
-				var author = $('input[name=username]').val(); //return undefined object
-				
-				var message = $('input[name=message]').val();
-				console.log(author)
-				alert(message)
+                function renderMessage(message) {
+                    $('.messages').append(
+                        '<div class="message"><strong>' +
+                            message.author +
+                            '</strong>: ' +
+                            message.message +
+                            '</div>'
+                    );
+                }
 
-				if(author.length && message.length) {
-					var messageObject = {
-						author: author,
-						message: message,
-					};
+                socket.on('previousMessages', function (messages) {
+                    for (message of messages) {
+                        renderMessage(message);
+                    }
+                });
 
-					socket.emit('sendMessage', messageObject);
-					console.log(messageObject)
-				}
-			});
-		});
-    </script>
+                socket.on('receivedMessage', function (message) {
+                    renderMessage(message);
+                });
 
-</body>
+                $('#chat').submit(function (event) {
+                    event.preventDefault();
+
+                    var author = $('input[name=username]').val(); //return undefined object
+
+                    var message = $('input[name=message]').val();
+                    console.log(author);
+
+                    if (author.length && message.length) {
+                        var messageObject = {
+                            author: author,
+                            message: message,
+                        };
+
+                        renderMessage(messageObject);
+
+                        socket.emit('sendMessage', messageObject);
+                        console.log(messageObject);
+                    }
+                });
+            });
+        </script>
+    </body>
 </html>
