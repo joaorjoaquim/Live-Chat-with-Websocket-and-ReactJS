@@ -17,13 +17,12 @@ app.use('/', (req, res) => {
 
 let messages = [];
 
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
     console.log(`Socket conectado: ${socket.id}`);
 
-    var clients = io.allSockets();
-    console.log(`Lista de sockets: ${clients}`);
-
     socket.emit('previousMessages', messages);
+    //const sockets = (await io.fetchSockets()).map((socket) => socket.id);
+    //console.log(sockets);
 
     socket.on('sendMessage', (data) => {
         messages.push(data);

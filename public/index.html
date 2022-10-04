@@ -29,7 +29,9 @@
                                 placeholder="Digite seu usuário"
                             />
                         </div>
-                        <div class="__onlineList"></div>
+                        <div class="__onlineList">
+                            <div class="sockets"></div>
+                        </div>
                     </div>
                     <div class="__chatbody">
                         <div class="__messages">
@@ -64,14 +66,10 @@
                     );
                 }
 
-                function renderSocketList(message) {
+                function renderSocketList(socket) {
                     //arrumar
-                    $('.messages').append(
-                        '<div class="message"><strong>' +
-                            message.author +
-                            '</strong>: ' +
-                            message.message +
-                            '</div>'
+                    $('.sockets').append(
+                        '<div class="socket"><strong> Socket:' + socket
                     );
                 }
 
