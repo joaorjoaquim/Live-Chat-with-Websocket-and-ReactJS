@@ -17,11 +17,21 @@
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
-        <div id="root">
-            <div class="__main">
-                <div class="__sidebar"></div>
-                <div class="__chatbody">
-                    <form id="chat">
+        <form id="chat">
+            <div id="root">
+                <div class="__main">
+                    <div class="__sidebar">
+                        <div class="__senderName">
+                            <input
+                                type="text"
+                                class="__inputSender"
+                                name="username"
+                                placeholder="Digite seu usuário"
+                            />
+                        </div>
+                        <div class="__onlineList"></div>
+                    </div>
+                    <div class="__chatbody">
                         <div class="__messages">
                             <div class="messages"></div>
                         </div>
@@ -36,16 +46,26 @@
                                 <i class="fa fa-paper-plane"></i>
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-
+        </form>
         <script type="text/javascript">
             $(document).ready(function () {
                 var socket = io('http://localhost:3000');
 
                 function renderMessage(message) {
+                    $('.messages').append(
+                        '<div class="message"><strong>' +
+                            message.author +
+                            '</strong>: ' +
+                            message.message +
+                            '</div>'
+                    );
+                }
+
+                function renderSocketList(message) {
+                    //arrumar
                     $('.messages').append(
                         '<div class="message"><strong>' +
                             message.author +
@@ -68,8 +88,8 @@
                 $('#chat').submit(function (event) {
                     event.preventDefault();
 
-                    // var author = $('input[name=username]').val(); //return undefined object
-                    var author = 'Usuário';
+                    var author = $('input[name=username]').val(); //return undefined object
+                    // var author = 'Usuário';
                     var message = $('input[name=message]').val();
 
                     var today = new Date();
