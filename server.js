@@ -20,6 +20,9 @@ let messages = [];
 io.on('connection', (socket) => {
     console.log(`Socket conectado: ${socket.id}`);
 
+    var clients = io.allSockets();
+    console.log(`Lista de sockets: ${clients}`);
+
     socket.emit('previousMessages', messages);
 
     socket.on('sendMessage', (data) => {
