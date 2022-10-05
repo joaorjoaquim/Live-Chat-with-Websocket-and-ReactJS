@@ -23,6 +23,7 @@ io.on('connection', async (socket) => {
     //socket.emit('previousMessages', messages);
     const sockets = (await io.fetchSockets()).map((socket) => socket.id);
     console.log(sockets);
+    socket.emit('previousMessages', messages);
 
     socket.on('sendMessage', (data) => {
         messages.push(data);
