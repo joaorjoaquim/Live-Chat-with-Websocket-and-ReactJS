@@ -20,9 +20,9 @@ let messages = [];
 io.on('connection', async (socket) => {
     console.log(`Socket conectado: ${socket.id}`);
 
-    socket.emit('previousMessages', messages);
-    //const sockets = (await io.fetchSockets()).map((socket) => socket.id);
-    //console.log(sockets);
+    //socket.emit('previousMessages', messages);
+    const sockets = (await io.fetchSockets()).map((socket) => socket.id);
+    console.log(sockets);
 
     socket.on('sendMessage', (data) => {
         messages.push(data);
