@@ -69,7 +69,8 @@
                 function renderSocketList(socket) {
                     //arrumar
                     $('.sockets').append(
-                        '<div class="socket"><strong> Socket:' + socket
+                        '<div class="socket"><strong> Socket: </strong>' +
+                            socket
                     );
                 }
 
@@ -80,6 +81,7 @@
                 });
 
                 socket.on('connectedSockets', function (sockets) {
+                    $('.sockets').html('');
                     for (socket of sockets) {
                         renderSocketList(socket);
                     }
