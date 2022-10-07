@@ -79,6 +79,12 @@
                     }
                 });
 
+                socket.on('connectedSockets', function (sockets) {
+                    for (socket of sockets) {
+                        renderSocketList(socket);
+                    }
+                });
+
                 socket.on('receivedMessage', function (message) {
                     renderMessage(message);
                 });
