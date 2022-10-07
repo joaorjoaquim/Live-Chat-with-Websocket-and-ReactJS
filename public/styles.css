@@ -62,7 +62,6 @@ body {
 .__onlineList {
     flex: 1 0 auto;
     width: auto;
-    background-color: coral;
 }
 
 .__chatbody {
@@ -87,10 +86,10 @@ body {
 }
 
 .__inputField {
-    max-height: 8%;
+    max-height: 10%;
 
     width: 95%;
-    background-color: #fff;
+
     border-radius: 15px;
     padding: 2 px;
     margin: auto;
@@ -100,12 +99,13 @@ body {
     flex-grow: 1;
 }
 .__messageInput {
-    max-height: 80%;
-    min-height: 2vh;
+    max-height: 90%;
+    min-height: 3vh;
     flex-grow: 1;
     padding: 10px;
     border: none;
     outline: none;
+    border-radius: 15px;
 }
 
 .__btnSubmit {
@@ -123,6 +123,7 @@ body {
     border-radius: 50%;
     padding: auto;
     margin-left: 1%;
+    margin-right: 1%;
     cursor: pointer;
 }
 
